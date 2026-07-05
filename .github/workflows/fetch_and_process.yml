@@ -24,13 +24,12 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y ffmpeg
+        sudo apt-get install -y ffmpeg nodejs
         python -m pip install --upgrade pip
-        pip install yt-dlp requests firebase-admin
+        pip install -U yt-dlp requests firebase-admin
 
     - name: Run Processing Script
       env:
-        # هذه المتغيرات يتم ضبطها في إعدادات المستودع (Settings -> Secrets and variables)
         FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
