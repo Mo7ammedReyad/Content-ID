@@ -1,0 +1,37 @@
+name: Fetch, Bypass Content ID, and Store Video
+
+on:
+  workflow_dispatch:
+    inputs:
+      video_url:
+        description: 'أدخل رابط فيديو اليوتيوب الشورتس هنا'
+        required: true
+        type: string
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
+        python -m pip install --upgrade pip
+        pip install yt-dlp requests firebase-admin
+
+    - name: Run Processing Script
+      env:
+        # هذه المتغيرات يتم ضبطها في إعدادات المستودع (Settings -> Secrets and variables)
+        FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        python processor.py "${{ github.event.inputs.video_url }}"
