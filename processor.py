@@ -6,7 +6,6 @@ import subprocess
 import requests
 import firebase_admin
 from firebase_admin import credentials, firestore
-from google.cloud.firestore_v1.base_batch import WriteBatch
 
 # 1. إعداد Firebase
 def init_firebase():
