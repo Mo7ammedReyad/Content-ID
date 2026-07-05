@@ -26,7 +26,7 @@ def download_video(video_url):
     video_id = str(uuid.uuid4()) # توليد معرف فريد محلي للمشروع
     output_raw = f"raw_{video_id}.mp4"
     
-    print(#128311; جاري تحميل الفيديو واستخراج البيانات...")
+    print("🔷 جاري تحميل الفيديو واستخراج البيانات...")
     # أمر yt-dlp لتحميل الفيديو واستخراج الـ JSON الخاص به
     cmd = [
         "yt-dlp",
